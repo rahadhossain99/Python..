@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader - ব্যবহার নির্দেশিকা</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f9f9 0%, #e6f0ff 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+            transform: rotate(30deg);
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #ff0000;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card h2 {
+            color: #ff0000;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+        }
+        
+        .card h2 i {
+            margin-right: 12px;
+            font-size: 1.6rem;
+        }
+        
+        .step {
+            margin-bottom: 25px;
+            padding-left: 25px;
+            border-left: 3px solid #ff0000;
+            position: relative;
+        }
+        
+        .step::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff0000;
+            border-radius: 50%;
+            left: -12px;
+            top: 0;
+            box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.2);
+        }
+        
+        .step h3 {
+            margin-bottom: 10px;
+            color: #222;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step h3 i {
+            margin-right: 10px;
+            color: #ff0000;
+        }
+        
+        .code-container {
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .code {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding-right: 60px;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .copy-btn:hover {
+            background: #3e8e41;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn i {
+            margin-right: 5px;
+        }
+        
+        .download-section {
+            text-align: center;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+            transform: rotate(30deg);
+        }
+        
+        .download-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .download-section p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: #ff0000;
+            padding: 16px 45px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 15px;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        .download-btn i {
+            margin-right: 12px;
+            font-size: 1.4rem;
+        }
+        
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .note i {
+            color: #ffc107;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            color: #666;
+            font-size: 1rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .step {
+                padding-left: 20px;
+            }
+            
+            .download-btn {
+                padding: 14px 35px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Animation for elements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Toast notification for copy */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(46, 46, 46, 0.95);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        .toast i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="animate">
+            <h1><i class="fab fa-youtube"></i> YouTube Video Downloader</h1>
+            <p>Python দিয়ে তৈরি YouTube ভিডিও ডাউনলোডার টুল</p>
+        </header>
+        
+        <div class="card animate delay-1">
+            <h2><i class="fas fa-book-open"></i> কিভাবে ব্যবহার করবেন</h2>
+            
+            <div class="step">
+                <h3><i class="fas fa-download"></i> ধাপ ১: Python ফাইল ডাউনলোড করুন</h3>
+                <p>নিচে দেওয়া ডাউনলোড বাটন থেকে Python কোডটি ডাউনলোড করুন এবং আপনার কম্পিউটারে সেভ করুন (যেমন: youtube_downloader.py)</p>
+            </div>
+            
+            <div class="step">
+                <h3><i class="fas fa-cogs"></i> ধাপ ২: প্রয়োজনীয় লাইব্রেরি ইন্সটল করুন</h3>
+                <p>Terminal বা Command Prompt খুলে নিচের কমান্ডটি রান করুন:</p>
+                <div class="code-container">
+                    <div class="code" id="code1">pip install pytube pillow requests</div>
+                    <button class="copy-btn" onclick="copyCode('code1')"><i class="fas fa-copy"></i> কপি করুন</button>
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3><i class="fas fa-play-circle"></i> ধাপ ৩: প্রোগ্রামটি রান করুন</h3>
+                <p>Terminal বা Command Prompt এ নিচের কমান্ডটি লিখে Enter চাপুন:</p>
+                <div class="code-container">
+                    <div class="code" id="code2">python youtube_downloader.py</div>
+                    <button class="copy-btn" onclick="copyCode('code2')"><i class="fas fa-copy"></i> কপি করুন</button>
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3><i class="fas fa-video"></i> ধাপ ৪: YouTube ভিডিও ডাউনলোড করুন</h3>
+                <p>প্রোগ্রামটি চালু হলে:</p>
+                <ul>
+                    <li>YouTube ভিডিওর URL দিন এবং "Fetch Video" বাটনে ক্লিক করুন</li>
+                    <li>ভিডিওর বিবরণ দেখার পর ডাউনলোড কোয়ালিটি সিলেক্ট করুন</li>
+                    <li>"Download Video" বাটনে ক্লিক করুন এবং ডাউনলোড লোকেশন সিলেক্ট করুন</li>
+                    <li>ডাউনলোড শেষ হলে ভিডিওটি আপনার সিলেক্টেড ফোল্ডারে সেভ হবে</li>
+                </ul>
+            </div>
+            
+            <div class="note">
+                <i class="fas fa-exclamation-circle"></i>
+                <div>
+                    <strong>নোট:</strong> এই টুলটি শুধুমাত্র ব্যক্তিগত ব্যবহারের জন্য। যে কোনো ভিডিও ডাউনলোড করার আগে দয়া করে কপিরাইট নিয়মগুলি পরীক্ষা করুন।
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-section animate delay-2">
+            <h2><i class="fas fa-file-download"></i> Python কোড ডাউনলোড করুন</h2>
+            <p>নিচের বাটন ক্লিক করে সম্পূর্ণ Python প্রোগ্রামটি ডাউনলোড করুন</p>
+            <a href="https://drive.google.com/file/d/13c7FKkmhN9H3m8WUGevhOPtseIpBguBt/view?usp=drivesdk" class="download-btn"><i class="fas fa-download"></i> ডাউনলোড করুন</a>
+        </div>
+        
+        <div class="card animate delay-3">
+            <h2><i class="fas fa-tools"></i> সমস্যা সমাধান</h2>
+            <div class="step">
+                <h3><i class="fas fa-exclamation-triangle"></i> ইন্সটলেশন সমস্যা</h3>
+                <p>যদি pip install করতে সমস্যা হয়, তবে নিশ্চিত করুন যে Python এবং pip সঠিকভাবে ইন্সটল করা আছে। pip আপডেট করতে নিচের কমান্ড ব্যবহার করুন:</p>
+                <div class="code-container">
+                    <div class="code" id="code3">python -m pip install --upgrade pip</div>
+                    <button class="copy-btn" onclick="copyCode('code3')"><i class="fas fa-copy"></i> কপি করুন</button>
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3><i class="fas fa-bug"></i> প্রোগ্রাম চালাতে সমস্যা</h3>
+                <p>প্রোগ্রাম চালানোর সময় যদি কোনো error দেখায়, তবে নিশ্চিত করুন যে সকল প্রয়োজনীয় লাইব্রেরি সঠিকভাবে ইন্সটল করা আছে:</p>
+                <div class="code-container">
+                    <div class="code" id="code4">pip install pytube pillow requests</div>
+                    <button class="copy-btn" onclick="copyCode('code4')"><i class="fas fa-copy"></i> কপি করুন</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="animate delay-3">
+            <p>© ২০২৫ YouTube Video Downloader | শুধুমাত্র শিক্ষামূলক উদ্দেশ্যে</p>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>কোড কপি করা হয়েছে!</span>
+    </div>
+
+    <script>
+        // Copy code function
+        function copyCode(id) {
+            const codeElement = document.getElementById(id);
+            const textArea = document.createElement('textarea');
+            textArea.value = codeElement.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            // Show toast notification
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Add animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
